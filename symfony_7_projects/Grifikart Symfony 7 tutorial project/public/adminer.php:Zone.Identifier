@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://www.adminer.org/
+HostUrl=https://objects.githubusercontent.com/github-production-release-asset-2e65be/627735/69e37b80-b488-11eb-91d0-4c6efaa6b9f1?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20250220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250220T105043Z&X-Amz-Expires=300&X-Amz-Signature=26a57f8807035614912ec88693f08b9e091ab83d44aa841a981c33bb2c3b5bcc&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Dadminer-4.8.1-mysql-en.php&response-content-type=application%2Foctet-stream

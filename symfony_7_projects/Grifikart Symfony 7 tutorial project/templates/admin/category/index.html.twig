@@ -1,0 +1,43 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title " Categorie" %} 
+
+{% block body %}
+    <p>
+        Note that you should compare same length hashes, e.g. sha384 with sha384, otherwise it’s expected for them to be different. As such, you can use an online tool like SRI Hash Generator to make sure that the hashes are the same for a given file. Alternatively, assuming you have OpenSSL installed, you can achieve the same from the CLI, for example:
+    </p>
+
+    <p>
+      <a class="btn btn-primary btn-sm" href={{ path('admin.category.create') }}> ajouter</a>    
+    </p>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for category in categories %}
+        <tr>
+            <td>{{category.name}}</td>
+            <td>{{category.count}}</td>
+            {# <td>
+              
+                <a href="{{ path('/admin/category/{id}',{id: category.category.id})}}">Editer</a>
+            </td> #}
+            <td class='d-flex gap-1'>
+                <a class="btn btn-primary btn-sm" href={{ path('admin.category.edit', {id:category.id}) }}> edite</a>
+                <form action="{{ path('admin.category.delete', {id:category.id}) }}" method="post">
+                    <input  type='hidden' name='_method' value='DELETE' />
+                <button type="submit" class="btn btn-danger btn-sm" >supprimer </button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}

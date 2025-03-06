@@ -1,0 +1,14 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title "Service: " ~ service.title %} 
+
+{% block body %}
+
+<h1>{{service.title}}</h1>
+
+    <img src="{{ vich_uploader_asset(service, 'thumbnailFile') }}" alt=""  />
+
+    <turbo-frame id="service_{{ service.id }}">
+    {{ form(form, {action:  path('admin.service.edit', {id: service.id}) }) }}
+    </turbo-frame>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title " Toutes les Services" %} 
+
+{% block body %}
+    <p>
+        Note that you should compare same length hashes, e.g. sha384 with sha384, otherwise it’s expected for them to be different. As such, you can use an online tool like SRI Hash Generator to make sure that the hashes are the same for a given file. Alternatively, assuming you have OpenSSL installed, you can achieve the same from the CLI, for example:
+    </p>
+
+    <p>
+      <a class="btn btn-primary btn-sm" href={{ path('admin.service.create') }}> ajouter</a>    
+    </p>
+    <div id="flash"></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(services, 'ID', 's.id') }}</th>
+                <th>{{ knp_pagination_sortable(services, 'Titre', 's.title') }}</th>
+                <th>Categories</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for service in services %}
+        <tr id="row_service_{{ service.id }}">
+            <td>{{service.id}}</td>
+            <td>
+
+                <turbo-frame id="service_{{ service.id }}">
+                {# <a href={{ path('/admin/services/{id}',{id: service.id}) }}>{{service.title}}</a> #}
+                <a href={{ path('admin.service.edit', {id: service.id}) }}> {{service.title}}</a>
+                </turbo-frame>
+            </td>
+            <td>
+                {{ service.category.name | default('') }}
+            </td>
+            <td class='d-flex gap-1'>
+                <a class="btn btn-primary btn-sm" href={{ path('admin.service.edit', {id:service.id}) }}> edite</a>
+                <form action="{{ path('admin.service.delete', {id:service.id}) }}" method="post">
+                    <input  type='hidden' name='_method' value='DELETE' />
+                <button type="submit" class="btn btn-danger btn-sm" >supprimer </button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {# <div class="d-flex">
+        {% if page > 1 %}
+            <a href="{{ path('admin.service.index', {page: page - 1}) }}" class="btn btn-secondary" >Page précédente</a>
+        {% endif %}
+        {% if page < maxPage %}
+            <a href="{{ path('admin.service.index', {page: page + 1}) }}" class="btn btn-secondary" >Page Suivante</a>
+        {% endif %}
+    </div> #}
+
+    {{ knp_pagination_render(services) }}
+
+{% endblock %}

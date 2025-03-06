@@ -1,0 +1,71 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title post.title %}
+
+{% block body %}
+    <div {{ turbo_stream_listen("post_#{post.id}_comments") }}></div>
+    
+    <article>
+        <h1>{{ post.title }}</h1>
+
+        <p>{{ post.tags|join(', ') }}</p>
+
+        <p>
+            Published <time datetime="{{ post.publishedAt|date('Y-m-d H:i') }}">{{ post.publishedAt|date }}</time> by {{ post.author.email }}
+        </p>
+
+        <p>{{ post.body|raw }}</p>
+    </article>
+
+    <a href="{{ path('app_posts_share', { slug: post.slug }) }}">Share this post</a>
+
+    <hr>
+
+    {% if previousPost %}
+        <a href="{{ path('app_posts_show', { slug: previousPost.slug }) }}">Previous Post</a>
+    {% endif %}
+    {% if nextPost %}
+        <a href="{{ path('app_posts_show', { slug: nextPost.slug }) }}">Next Post</a>
+    {% endif %}
+
+    <hr>
+
+    <section class="mt-5">
+        <h2>Similar posts</h2>
+
+        {% for post in similarPosts %}
+            {# <p>{{ post.tags|join(', ') }}</p> #}
+            <p>
+                <a href="{{ path('app_posts_show', { slug: post.slug }) }}">
+                    {{ post.title }}
+                </a>
+            </p>
+        {% else %}
+            There are no similar posts yet.
+        {% endfor %}
+    </section>
+
+    <section class="mt-5">
+        <h2 id="comments-count">{{ pluralize(comments|length, 'comment') }}</h2>
+
+        <div id="comment-list">
+            {% for comment in comments %}
+                {{ include('comments/_comment.html.twig', { comment, index: loop.index }) }}
+            {% else %}
+                <p>There are no comments yet.</p> 
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Add a new comment</h2>
+                
+                <turbo-frame id="new-comment-form">
+                    {{ include('comments/_form.html.twig', { commentForm }) }}
+                </turbo-frame>
+            </div>
+        </div>
+    </section>
+{% endblock %}

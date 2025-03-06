@@ -1,0 +1,12 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title "Service: " ~ service.title %} 
+
+{% block body %}
+
+<h1>{{service.title}}</h1>
+<p>
+{{service.content | nl2br}}
+</p>
+
+{% endblock %}
