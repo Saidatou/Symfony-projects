@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ventes index{% endblock %}
+
+{% block body %}
+    <h1>Ventes index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Photo</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Active</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vente in ventes %}
+            <tr>
+                <td>{{ vente.id }}</td>
+                <td>{{ vente.nom }}</td>
+                <td>{{ vente.photo }}</td>
+                <td>{{ vente.description }}</td>
+                <td>{{ vente.date ? vente.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ vente.active ? 'Yes' : 'No' }}</td>
+                <td>{{ vente.prix }}</td>
+                <td>
+                    <a href="{{ path('ventes_show', {'id': vente.id}) }}">show</a>
+                    <a href="{{ path('ventes_edit', {'id': vente.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ventes_new') }}">Create new</a>
+{% endblock %}

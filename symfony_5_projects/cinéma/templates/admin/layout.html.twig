@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Back Office{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset("css/style_admin.css") }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ path("film_index") }}">Gestion des films</a></li>
+                <li><a href="{{ path("artiste_index") }}">Gestion des artistes</a></li>
+                <li><a href="{{ path("app_logout") }}">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}

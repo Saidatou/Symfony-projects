@@ -1,0 +1,56 @@
+/*******************************Tous les médias***********************************************************/
+body{
+   
+    margin: 0px;
+   
+  
+}
+
+
+
+#contenuMenu{
+    color:white !important;
+}
+
+.logo img{
+    position:absolute;
+    margin-top:15px;
+    margin-left:50px;
+    margin-right: 20px;
+    
+}
+.navbar-brand {
+	padding: 10px 0;
+	vertical-align: top;
+	margin: 0;
+}
+.logo {
+	display: none;
+}
+.logo{
+	display: block;
+}
+
+
+
+/*************Small devices (landscape phones, 576px and up)*************************************/
+@media (min-width: 576px) { 
+    #types_de_coaching{
+        display: none;
+    }
+ }
+
+/****************************** Medium devices (tablets, 768px and up)******************************/
+@media (min-width: 768px) { 
+#types_de_coaching{
+    display: none;
+}
+}
+
+
+/****************************Large devices (desktops, 992px and up)********************************/
+@media (min-width: 992px) {  
+#types_de_coaching{
+    border: 1px solid blue;
+}
+}

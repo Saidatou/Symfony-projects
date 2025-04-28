@@ -1,0 +1,16 @@
+1. ok: homepageshould work: Password Generator 
+2. ok: generated password page should work: Generated Password
+3. ok: test password generatio form
+4. ok: test what happens if length <8 et > 60
+5. ok: first time homepage no cookies
+6. ok: cookies set when submitting form the first time.
+7. ok: form is  prepopulated with cookies values
+8. test password validity based on constraints
+
+-test unitaires (une unité de notre application comme )
+-test d'application
+
+-installation de: composer require symfony/test-pack
+
+- faire : php bin/phpunit ou php bin/phpunit --testdox pour filtrer faire php bin/phpunit --filter homepage_should 
+-creer un fichier de test : symfony console make:test

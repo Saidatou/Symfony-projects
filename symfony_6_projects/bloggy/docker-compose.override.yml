@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+###> symfony/mailer ###
+  mailer:
+    image: schickling/mailcatcher
+    ports: [1025, 1080]
+###< symfony/mailer ###
+
+###> meilisearch/search-bundle ###
+  meilisearch:
+    ports:
+      - "7700:7700"
+###< meilisearch/search-bundle ###
+
+###> symfony/mercure-bundle ###
+  mercure:
+    ports:
+      - "8888:80"
+###< symfony/mercure-bundle ###

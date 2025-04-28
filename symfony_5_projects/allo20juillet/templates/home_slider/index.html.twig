@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HomeSlider index{% endblock %}
+
+{% block body %}
+    <h1>HomeSlider index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>ButtonMessage</th>
+                <th>ButtonURL</th>
+                <th>Image</th>
+                <th>IsDisplayed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for home_slider in home_sliders %}
+            <tr>
+                <td>{{ home_slider.id }}</td>
+                <td>{{ home_slider.Title }}</td>
+                <td>{{ home_slider.description }}</td>
+                <td>{{ home_slider.buttonMessage }}</td>
+                <td>{{ home_slider.buttonURL }}</td>
+                <td>{{ home_slider.image }}</td>
+                <td>{{ home_slider.isDisplayed ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('home_slider_show', {'id': home_slider.id}) }}">show</a>
+                    <a href="{{ path('home_slider_edit', {'id': home_slider.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('home_slider_new') }}">Create new</a>
+{% endblock %}

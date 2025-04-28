@@ -1,0 +1,34 @@
+/*********************************************Tous les medias********************************************************/
+body{
+    background_color:red !important;
+}
+
+/*********************************************smartphone et tablette******************************************/
+@media (max-width: 991.98px){
+
+}
+/********************************************* pc et TV ********************************************************/
+@media (min-width:992px){
+    #navbar{
+        display:flex;
+        flex-direction:column;
+        width: 17em;
+        height: 100vh;
+    }
+    #navbar .navbar-brand img{
+        border: 8px solid;
+    }
+
+    #navbar .navbar-brand{
+        padding: 30px;
+    }
+
+    #navbar .navbar-collapse .navbar-nav{
+      display:inline-block;
+      text-align:center;
+      text-transform: uppercase;
+    }
+
+
+
+}

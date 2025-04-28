@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Annonce
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center mt-4">Devenir coach</h1>
+
+	{{ include('annonce/_form.html.twig') }}
+
+	{# <a href="{{ path('annonce_index') }}">back to list</a> #}
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		window.onload = () => { // on va chercher la région
+let region = document.querySelector("#annonce_region");
+region.addEventListener("change", function () { // recupérer le formulaire complet.la balise closest form la plus proche mon élément c'est le parent
+let form = this.closest("form");
+
+
+let data = this.name + "=" + this.value;
+console.log(data)
+// on envoie tout en ajax au formulaire avec les actions
+fetch(form.action, {
+method: form.getAttribute("method"),
+body: data,
+headers: {
+"Content-Type": "application/x-www-form-urlencoded;charset: UTF - 8 "
+}
+// traiter la réponse car le fetch est une promesse
+}).then(response => response.text()).then(html => {
+let content = document.createElement("html");
+content.innerHTML = html;
+let nouveauSelect = content.querySelector("#annonce_departement");
+document.querySelector("#annonce_departement").replaceWith(nouveauSelect);
+}).catch(error => {
+console.log(error);
+})
+});
+}
+	</script>
+{% endblock %}

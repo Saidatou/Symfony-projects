@@ -1,0 +1,22 @@
+{% extends "front/layout.html.twig" %}
+
+{% block content %}
+    <h1>{{ film.titre }}</h1>
+     <img src="{{ asset("img/" ~ film.affiche ) }}" alt="{{ film.titre }}" title="{{ film.titre }}" />
+     <p>Sortie en {{ film.dateDeSortie|date("Y") }}</p>
+     <p>Réalisé par<a href=" {{ path ("artiste_front", {"id": film.realisateur.id})}}">{{ film.realisateur }}</a></p>
+
+    <h2>Casting</h2>
+
+
+    {% for acteur in film.acteurs %}
+        <div class="acteur">
+                 <img src="{{ asset("img/" ~ acteur.photo ) }}" alt="{{ acteur }}" title="{{ acteur }}" />
+                <a href=" {{ path ("artiste_front", {"id": acteur.id})}}">{{ acteur }}</a>
+        </div>
+    {% endfor %}
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('film_edit', {'id': film.id } )}}">Editer le film</a>
+    {% endif %}
+{% endblock %}

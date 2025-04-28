@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}MC SPORTIFS!
+			{% endblock %}
+		</title>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="/assets/style.css">
+		<link rel="stylesheet" href="/assets/annonce.css">
+		<link rel="stylesheet" href="/assets/css/footer2.css">
+		<link rel="stylesheet" href="/assets/cards.css">
+		<link rel="stylesheet" href="/assets/css/caroussel.css">
+		<link rel="stylesheet" href="/assets/css/header4.css">
+		<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.css" integrity="sha256-N4huVLjch/cYU8fcsyfMDy3iz7YzxY/Z1Btcj62y7ZE=" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="/assets/css/sidebar.css"> {% block stylesheets %}{% endblock %}{% block scriptStripe %}{% endblock %}
+		</head>
+		<body>
+			{% include "partial/header4.html.twig" %}
+
+
+			{#  message d'alert #}
+			{% for message in app.flashes("message") %}
+				<div class="alert alert-success alert-dismissible fade show" role="alert">
+					{{message}}
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+
+			{% endfor %}
+
+
+			{% block body %}{% endblock %}
+			{% include "partial/footer.html.twig" %}
+			<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.9.0/main.min.js" integrity="sha256-aQ3VdEtGV6MDaxbR989+aWkW/PRGEvF2YW7mCUg5vjI=" crossorigin="anonymous"></script>
+			<script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+			<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+			<script src="/assets/js/navbar_script.js"></script>
+			{# <script src="/assets/js/app.js"></script> #}
+			<script src="/assets/js/caroussel_script.js"></script>
+
+
+			{% block javascripts %}{% endblock %}
+		</body>
+	</html>

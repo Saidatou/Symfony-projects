@@ -1,0 +1,98 @@
+<div class="section pb_70">
+	<div class="container">
+		<div class="row bg-light">
+			<div class="col-xl-4 col-md-6">
+				<div class="contact_wrap contact_style3">
+					<div class="contact_icon">
+						<i class="linearicons-map2"></i>
+					</div>
+					<div class="contact_text">
+						<span>Notre adresse postale:</span>
+						<p>17 rue Alphone karr 75019 - Paris</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-md-6">
+				<div class="contact_wrap contact_style3">
+					<div class="contact_icon">
+						<i class="linearicons-envelope-open"></i>
+					</div>
+					<div class="contact_text">
+						<span>Notre Adresse email :
+						</span>
+						<a href="mailto:info@sitename.com">contact@mcsportifs.com
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-md-6">
+				<div class="contact_wrap contact_style3">
+					<div class="contact_icon">
+						<i class="linearicons-tablet2"></i>
+					</div>
+					<div class="contact_text">
+						<span></span>Notre N° de téléphone :
+						<p>(+33)
+																																																																																																								01 234 567 88</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div></div>
+<div class="section pt-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<h3 class="leads text-center mt-3 mb-3">
+					Nous vous remercions de renseigner les champs du formulaire de contact ci-dessous</h3>
+				<div class="field_form">
+					{{ form_start(form) }}
+					<div class="row">
+						{% for message in app.flashes('contact_success') %}
+							<div class="col-md-12 alert alert-success alert-dismissible fade show" role="alert">
+								{{ message }}
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						{% endfor %}
+						{% for message in app.flashes('contact_error') %}
+							<div class="col-md-12 alert alert-danger alert-dismissible fade show" role="alert">
+								{{ message }}
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						{% endfor %}
+						<div class="form-group col-md-6">
+							{{ form_row(form.name, {"label":"Votre Nom et Prénom : "}) }}
+						</div>
+						<div class="form-group col-md-6">
+							{{ form_row(form.email, {"label":"Votre email : "}) }}
+						</div>
+						<div class="form-group col-md-6">
+							{{ form_row(form.phone,{"label":"Votre N° de téléphone : "})  }}
+						</div>
+						<div class="form-group col-md-6">
+							{{ form_row(form.subject, {"label":"Objet : "}) }}
+						</div>
+						<div class="form-group col-md-12">
+							{{ form_row(form.content, {"label":"Votre message : "}) }}
+						</div>
+						<div class="col-md-12">
+							<button class="btn btn-primary btn-fill-out mb-3">{{ button_label|default('Envoyer') }}</button>
+
+						</div>
+
+					</div>
+					{{ form_end(form)}}
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

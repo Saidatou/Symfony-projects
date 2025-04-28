@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset("css/style_front.css")}}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <header>
+        <div id="logo">
+            IMDB
+        </div>
+        <nav>
+            <a href="{{ path('front') }}">Tous les films</a>
+        </nav>
+    </header>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}

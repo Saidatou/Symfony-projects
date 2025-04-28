@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FrontController!{% endblock %}
+
+{% block body %}
+<h1>bienvenue sur le calendrier des fruits et legumes</h1>
+{% endblock %}
+  {% block title %} Fruits index {% endblock %}
+        {% block body %}
+        <h1>Liste des fruits </h1>
+            <ul>
+            {% for leg in fruits %}
+            <li> {{leg.nom}}</li>
+            {% endfor %}
+            </ul>
+        
+        {% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce index
+{% endblock %}
+
+{% block body %}
+	<h1>Annonce index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nickname</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Experience</th>
+				<th>Formation</th>
+				<th>IsInYourHome</th>
+				<th>IsInClientHome</th>
+				<th>IsInByVisio</th>
+				<th>City</th>
+				<th>Coaching Places</th>
+				<th>Image</th>
+				<th>Cv</th>
+				<th>Rib</th>
+				<th>Siretnumber</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for annonce in annonces %}
+				<tr>
+					<td>{{ annonce.id }}</td>
+					<td>{{ annonce.nickname }}</td>
+					<td>{{ annonce.title }}</td>
+					{# <td>{{ annonce.slug }}</td> #}
+					<td>{{ annonce.description }}</td>
+					<td>{{ annonce.experience }}</td>
+					<td>{{ annonce.formation }}</td>
+					<td>{{ annonce.isInYourHome ? 'Yes' : 'No' }}</td>
+					<td>{{ annonce.isInClientHome ? 'Yes' : 'No' }}</td>
+					<td>{{ annonce.isInByVisio ? 'Yes' : 'No' }}</td>
+					<td>{{ annonce.city }}</td>
+					<td>{{ annonce.image }}</td>
+					<td>{{ annonce.cv }}</td>
+					<td>{{ annonce.rib }}</td>
+					<td>{{ annonce.siretnumber }}</td>
+					<td>{{ annonce.coachingPlaces }}</td>
+					<td>
+						<a href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
+						<a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="16">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('annonce_new') }}">Create new</a>
+{% endblock %}

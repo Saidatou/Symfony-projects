@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout MCSPORTIF!
+{% endblock %}
+
+{% block body %}
+	{{ include ("partial/title_section.html.twig", {"name":"Checkout : Information commande"})  }}
+
+	<div class="section checkout">
+		<div
+			class="container">
+			{# l'action sur le bouton confimer mes information débouche sur la page confirm #}
+			{{ form_start(checkout, {action: path('checkout_confirm')}) }}
+			<div class="row">
+				<div class="col-md-6">
+					<div class="heading_s1">
+						<a href="{{ path('address_new')}}" class="btn btn-info btn-fill-out btn-block mt-1">Ajouter une adresse</a>
+
+						ou
+						<hr>
+						<h4>Veuillez choisir une adresse :
+						</h4>
+						<p class="text-primary">NB: L'adresse choisit est l'adresse de séance lorsque c'est vous qui choisissez le lieu de séance</p>
+						{# faire un affichage en checkbox pour afin de facilister le choix pour l'utilusateur #}
+						<div class="content">
+							{{ form_widget(checkout.address) | replace({'[spr]' : '<br>'}) | raw}}
+						</div>
+
+					</div>
+					<div class="heading_s1 pt-3">
+						<h4>Information sur votre coach :</h4>
+						<p class="text-danger">PS: Merci de renseigner les informations ci-dessous après avoir échanger avec le coach et convenu avec lui sur des modalités du coaching !!!!!</p>
+						<hr>
+						<h6>son nom :
+						</h6>
+						<div class="form-group mb-0">
+							{{ form_widget(checkout.name, {"label":" le nom du coach : "}) }}
+						</div>
+						<h6>la ville où il exerce :
+						</h6>
+						<div class="form-group mb-0">
+							{{ form_widget(checkout.city, {"label":"La ville d'exercice du coach : "})}}
+						</div>
+						<h6>son identifiant ou ID MCSPORTIFS :
+						</h6>
+						<div class="form-group mb-0">
+							{{ form_widget(checkout.id, {"label":"l'ID ou identifiant du coach : "}) }}
+						</div>
+						<div class="heading_s1">
+							<h4>Informations complémentaires :
+							</h4>
+							<div class="form-group mb-0">
+								{{ form_widget(checkout.informations) }}
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="order_review">
+						<div class="heading_s1">
+							<h4>Votre commande :</h4>
+						</div>
+						<div class="table-responsive order_table">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Article</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+								<tbody>
+									{#  à l'aide de la boucle for on va répété autant de lignes que nous avons d'élément dans le panier  #}
+									{% for element in cart.products %}
+										<tr>
+											{# à 'interieur on va afficher le nom du produit et sa quantité et son prix unitire  #}
+											<td>{{ element.product.name }}
+												<span class="product-qty">
+													x{{ element.quantity }}</span>
+											</td>
+											<td>
+												{{ element.product.price*element.quantity }}€</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										{# on affichera le prix total et on prendra le data que nous avons et le subtotal ht #}
+										<th>Total HT</th>
+										<td class="product-subtotal">{{ cart.data.subTotalHT }}€</td>
+									</tr>
+									<tr>
+										{# on recupéra la taxe ici #}
+										<th>TVA</th>
+										<td class="product-subtotal">{{ cart.data.Taxe }}€</td>
+									</tr>
+									<tr>
+										<th>Total TTC</th>
+										<td class="product-subtotal">{{ cart.data.subTotalTTC }}€</td>
+									</tr>
+								</tfoot>
+
+							</table>
+						</div>
+						<div class="payment_method">
+							<div class="heading_s1">
+								<h4>Payement</h4>
+							</div>
+
+						</div>
+						<button type="submit" id="checkout-button" class="btn btn-primary btn-fill-out btn-block">Confirmer mes informations</button>
+					</div>
+				</div>
+			</div>
+			{{ form_end(checkout) }}
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+<div class="col-lg-3 col-md-4 col-6">
+	<div class="product">
+		<div class="product_img">
+			<a href="">
+				<img height="300" src="/assets/uploads/image/{{annonce.image}}" alt="annonce_img1">
+			</a>
+			<div class="product_action_box">
+				<ul class="list_none pr_action_btn">
+					<li class="add-to-cart">
+						<a href="{{path('messages',{'id':annonce.id})}}">
+							<i class="icon-basket-loaded"></i>
+							contacter le coach</a>
+					</li>
+					<li>
+						<a href="" class=""></li>
+					</li>
+					<li>
+						<a href="{{ path('annonce_details', {'slug': annonce.slug})}}" class=""></a>
+					</li>
+					<li>
+						<a href=""></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="product_info">
+			<h6 class="product_title">
+				<a href="">{{annonce.title}}</a>
+			</h6>
+
+			<div class="rating_wrap">
+				<div class="rating">
+					<div class="product_rate" style="width:80%"></div>
+				</div>
+
+				<span class="rating_num">({{ 5 }})</span>
+			</div>
+			<div class="pr_desc">
+				<p>{{annonce.description}}</p>
+			</div>
+		</div>
+	</div>
+</div>

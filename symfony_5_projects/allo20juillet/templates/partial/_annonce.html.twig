@@ -1,0 +1,41 @@
+<div
+	class=" container-fluid col-lg-4 col-md-4 text-white pt-3 pl-3 ml-3 bg-dark" style="margin-left: -10px !important; margin-right: -1px !important; ">
+	{# <div class="border container-fluid m-0 p-0 card-header text-white full-border" style="background-color: #169CE2; margin-left: -1px !important; margin-right: -1px !important; "> #}
+	<div class="coach ">
+
+		<div class="coach_img mr-3 pr-3 pl-3 pb-3">
+			<a href=" {{ path('a_details', {'id': annonce.id}) }}">
+				<img height="180" width="250" src="{{ vich_uploader_asset( annonce, 'imageFile') }}" alt="{{ annonce.nickname }}"/>
+
+			</a>
+
+		</div>
+
+		<div class="container mr-3 pr-3 pb-3 ">
+			<div class="annonce_info">
+				<h6 class="annonce_nickname d-flex">
+					<div>
+
+						{{annonce.nickname}}
+						:
+					</div>
+
+
+					<div>
+
+						{{annonce.city}}</div>
+
+
+				</h6>
+				<div class="annonce_title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{annonce.title}}</div>
+
+				<div class="annonce_city">
+					<a href="{{ path('a_details', {'id': annonce.id}) }}">
+
+						Voir son profile</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

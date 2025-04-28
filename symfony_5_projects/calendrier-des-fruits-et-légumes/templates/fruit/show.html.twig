@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fruit{% endblock %}
+
+{% block body %}
+    <h1>Fruit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fruit.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ fruit.nom }}</td>
+            </tr>
+            <tr>
+                <th>Mois</th>
+                <td>{{ fruit.mois }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('fruit_index') }}">back to list</a>
+
+    <a href="{{ path('fruit_edit', {'id': fruit.id}) }}">edit</a>
+
+    {{ include('fruit/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,9 @@
+-Post: 
+    -id : int
+    -title: string
+    -slug: string
+    -body: text
+    -publishedAt: datetime_immutable
+    -author: User
+    -createdAt: datetime_immutable
+    -updatedAt: datetime_immutable

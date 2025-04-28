@@ -1,0 +1,38 @@
+{% extends 'admin/layout.html.twig' %}
+
+
+
+{% block content %}
+    <h1>Film</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ film.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ film.titre }}</td>
+            </tr>
+            <tr>
+                <th>DateDeSortie</th>
+                <td>{{ film.dateDeSortie ? film.dateDeSortie|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Affiche</th>
+                <td>{{ film.affiche }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ film.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('film_index') }}">back to list</a>
+
+    <a href="{{ path('film_edit', {'id': film.id}) }}">edit</a>
+
+    {{ include('film/_delete_form.html.twig') }}
+{% endblock %}

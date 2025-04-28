@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Confirm Checkout MC SPORTIFS !
+{% endblock %}
+
+{% block scriptStripe %}
+	{# <script src="https://js.stripe.com/v3/"></script> #}
+{% endblock scriptStripe %}
+{% block body %}
+
+	{{ include("partial/title_section.html.twig", {'name':'Paiement'}) }}
+
+	<div class="section checkout">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="heading_s1">
+						<h4>Merci de vérifier votre adresse de séance</h4>
+
+						<div class="content" id="address">
+							{{ address | replace({'[spr]' : '<br>'}) | raw}}
+							<a href="{{ path('address_edit',{'id': address.id})}}" class="btn btn-info btn-fill-out mt-1">Modifier d'adresse</a>
+							<a href="{{ path('checkout_edit')}}" class="btn btn-info btn-fill-out mt-1">Changer d'adresse</a>
+						</div>
+
+					</div>
+					<div class="heading_s1">
+						<h4>Merci de vérifier les informations du caoch</h4>
+						<hr>
+						<div class="form-group mb-0" id="informations">
+							son nom :
+							{{ name }}
+						</div>
+						<div class="form-group mb-0" id="informations">
+							sa ville ou il/elle exerce:
+							{{ city }}
+						</div>
+						<div class="form-group mb-0" id="informations">
+							son identifiant ou ID sur le site :
+							{{ id }}
+						</div>
+
+						<a href="{{ path('checkout_edit')}}" class="btn btn-info btn-fill-out mt-1">Modifier Info coach</a>
+
+					</div>
+					{# vérifier si l'information est défini avant de l'afficher #}
+					{% if informations %}
+						<div class="heading_s1">
+							<h4>Merci de vérifier vos informations complémentaires</h4>
+							<div class="form-group mb-0" id="informations">
+								{{ informations }}
+							</div>
+						</div>
+					{% endif %}
+				</div>
+
+				<div class="col-md-6">
+					<div class="order_review">
+						<div class="heading_s1">
+							<h4>Votre commandes</h4>
+						</div>
+						<div class="table-responsive order_table">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+								<tbody>
+									{% for element in cart.products %}
+										<tr>
+											<td>
+												{{ element.product.name }}
+												<span class="product-qty">x
+													{{ element.quantity }}</span>
+											</td>
+											<td>
+												{{ element.product.price * element.quantity}}€</td>
+										</tr>
+									{% endfor %}
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Total HT</th>
+										<td class="product-subtotal">{{ cart.data.subTotalHT }}€</td>
+									</tr>
+									<tr>
+										<th>TVA</th>
+										<td class="product-subtotal">{{ cart.data.Taxe }}€</td>
+									</tr>
+									{# <tr>
+																																																																																																				<th>
+																																																																																																					{{annonce.nickname}})</th>
+																																																																																										
+																																																																																																			</tr> #}
+									<tr>
+										<th>Total TTC</th>
+										<td class="product-subtotal">{{ cart.data.subTotalTTC }}
+											€</td>
+									</tr>
+								</tfoot>
+
+							</table>
+						</div>
+						<div class="payment_method">
+							<div class="heading_s1">
+								<h4>Payment</h4>
+							</div>
+							<button type="submit" id="checkout-button" class="btn btn-danger btn-fill-out btn-block">
+								Payer |
+								{{ cart.data.subTotalTTC }}€
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{# {% block javascripts %}
+	<script type="text/javascript">
+		var stripe = Stripe("pk_test_51ICmCqGJ92ssJiXRdlkk67IhSWwT3hlTPGbtJeWUNHiihcXDY7AKqbNKFOKRgjDC11Feei2u0n1GDjVw7L7gxMoq00VVoepy9o");
+var checkoutButton = document.getElementById("checkout-button");
+
+checkoutButton.addEventListener("click", function () {
+fetch("/create-checkout-session/  {{ reference }}", {method: "POST"}).then(function (response) {
+return response.json();
+}).then(function (session) {
+return stripe.redirectToCheckout({sessionId: session.id});
+}).then(function (result) {
+// If redirectToCheckout fails due to a browser or network
+// error, you should display the localized error message to your
+// customer using error.message.
+if (result.error) {
+alert(result.error.message);
+}
+}).catch(function (error) {
+console.error("Error:", error);
+});
+});
+	</script>
+{% endblock %} #}

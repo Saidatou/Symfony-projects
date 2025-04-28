@@ -1,0 +1,24 @@
+{% extends "front/layout.html.twig" %}
+
+{% block content %}
+    <h1>{{ artiste.prenom }} {{ artiste.nom }} </h1>
+     <img src="{{ asset("img/affiches/" ~ artiste.photo ) }}" alt="{{ artiste }}" title="{{ artiste }}" />
+
+    <h2>Films réalisés</h2>
+    {% for film in artiste.filmsRealises %}
+        <a href="{{ path('film_front', { 'id': film.id } ) }}">
+            <img src="{{ asset("img/" ~ film.affiche ) }}" alt="{{ film.titre }}" title="{{ film.titre }}" />
+        </a>
+    {% endfor %}
+    
+    <p>A joué dans {{ artiste.filmsJoues|length }} films.</p>
+{% if artiste.filmsJoues|length > 0 %}
+    <h2>A joué dans </h2>
+    {% for film in artiste.filmsJoues %}
+        <a href="{{ path('film_front', { 'id': film.id } ) }}">
+            <img src="{{ asset("img/" ~ film.affiche ) }}" alt="{{ film.titre }}" title="{{ film.titre }}" />
+        </a>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.html.twig" %}
+{% block title %}notez un coach
+{% endblock %}
+{% block body %}
+	{# code présent sur la documentation de line awesome #}
+
+	<form action="" method="get">
+		<div>
+			<label for="titre">Titre</label>
+			<input type="text" name="titre">
+		</div>
+		<div>
+			<label for="commentaire">commentaire</label>
+			<textarea name="commentaire" id="commentaire"></textarea>
+		</div>
+		<div class="stars">
+			<i class="las la-star" data-value="1"></i>
+			<i class="las la-star" data-value="2"></i>
+			<i class="las la-star" data-value="3"></i>
+			<i class="las la-star" data-value="4"></i>
+			<i class="las la-star" data-value="5"></i>
+		</div>
+		<div>
+			<input type="hidden" name="note" id="note" value="0"></div>
+		<button type="submit">Valider</button>
+	</form>
+
+	{% block javascripts %}
+		<script>
+
+
+			// par un écouteur d 'évenement
+window.onload = () => { // on va chercher toutes les étoiles et les mettre sur le nom stars et aussi par nos balises i
+const stars = document.querySelectorAll(".la-star");
+// on va aussi chercher l'input par son id
+const note = document.querySelector("#note");
+// on va bouclé sur les étoiles pour ajouter des écouteurs d'évenemnt. star correspond à une étoiles .
+
+// GESTION DU SURVOLE est le premier evenement, il sera suivi donc du 2e qui est le clique
+// je colorer en rouge en rouge toute les étoiles au moment de leur survole.
+for (star of stars) { // on écoute le survole, je vais uiliser un mouseover, il faut sa
+star.addEventListener("mouseover", function () {
+// j'appellle ma fonction resetStars à ce niveau afin qu'il met la couleur de des étoiles suivant au noirs
+// mais pour la mise des étoiles précédents au noir je vais créer une varialble
+resetStarts(); // a ce niveau resetStar n'a pas de paramtre
+this.style.color = "red";
+this.classList.add("las"); // ligne1 ces deux lignes permettent d'avoir des étoiles pleines au survole
+this.classList.remove("lar");
+// ligne2
+
+// création de la variable qui va gérer la remise des couleurs des étoiles précédents au noir.
+// le previousElementSibling c'est l'élément précédent de même niveau dans le DOM
+// ou balise soeur précédente cad si je survole la balise data-value="4",
+// le previouselement Sibling serait la balise data-value="3" c'est lélément précédents
+
+let previousStar = this.previousElementSibling;
+// comme il s'agit d'agir succèssivement sur les étoiles précedents on va uliser la boucle while
+while (previousStar) { // on passe l'étoile qui précède en rouge
+previousStar.syle.color = "red";
+previousStar.classList.add("las"); // ligne1 ces deux lignes permettent d'avoir des étoiles pleines au survole
+previousStar.classList.remove("lar");
+// ligne2
+
+// on recupère l'étoile qui précède. et comme cela on va revenir au fur et à mesure ce qui implique que
+// je dois refaire le this.previousElement Sibling et là ce qu'il va faire
+// c'est qui va bouclé jusqu'à ce que previousElementsibling n'existe plus
+previousStar = previousStar.previousElementSibling;
+// apparaît des
+}
+
+});
+// GESTION DES EVENEMENTS SUR LE CLICK
+star.addEventListener("click", function () { // On recupère la note et on le met à l'intérieur de notre champs input. La note, on l'a dans data value qui va nous permetre la note dans le input. Je vais faire
+note.value = this.dataset.value; // pour aller chercher la valeur de la data. Cependand quant j'enlève le click de la souris et que je resurvole et je ne clique pas, la note clické reste stocké ds le input mais les étoile ne reste pas figé sur le dernier click il va sur la dernière survolé pour le gerer  il faut faire un mouseout pour que quand j'enlève la sourie les couleurs rouge prènenet en compte la note qui est dans le input
+
+});
+// UN MOUSEAOUT va être le troisième évenement
+star.addEventListener("mouseout", function () {
+resetStars(note.value);
+});
+
+}
+
+
+// commentaire : Reset des étoiles en vérifiant la note dans l'input caché. note @ param {number directement}
+function resetStarts(note = 0) {
+// cela signifie qu'on quitte le survole
+// cette function va bouclé sur chaque étoiles comme au déssus sauf qu'elle remetre les étoiles au noirs.
+// J'ai donc gérer le passage au noirs des étoiles qui suivent
+for (star of stars) {
+if (star.dataset.value > note) {
+star.style.color = "black";
+star.classList.add("lar"); // ligne1 ces deux lignes permettent d'avoir des étoiles pleines au survole
+star.classList.remove("las"); // ligne2
+
+} else {
+star.style.color = "red";
+star.classList.add("las"); // ligne1 ces deux lignes permettent d'avoir des étoiles pleines au survole
+star.classList.remove("lar"); // ligne2
+
+}
+
+
+}
+
+}
+
+}
+		</script>
+
+	{% endblock %}
+{% endblock %}

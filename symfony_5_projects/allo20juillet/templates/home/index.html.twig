@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	{# est ce que le homeSlider est défini? s'il est définit on l'affiche, sinon on affiche lle titre habituel#}
+
+
+	{{ include ("partial/title_section.html.twig", {"name":"Accueil"})  }}
+
+
+	<div class="container pt-40">
+		<div class="bg-white p-4"></div>
+		<div class="row d-flex ">
+			<div
+				class=" col justify-content-center">
+				{#  #}
+
+				<div class=" col justify-content align-text">
+
+					<h5 class="mb-3 font-weight-light">20% de réduction immédiat sur des seances dont le lieu est choisi par le coach ou pour des séances en visio avec la possibilité d'annulez votre séance jusqu'à 24h avant la séance :
+
+						<a class="btn sm btn-primary" href="{{path("home_product")}}">Acheter des heures</a>
+					</h5>
+
+
+				</div>
+
+			</div>
+		</div>
+		{# les coachs #}
+		<div class="bg-white p-4"></div>
+		<div class="section pt-40">
+			<div class="container pt-20">
+				<div class="row">
+
+					<div class="col-lg-3 order-lg-first mt-4 pt-2 mt-lg-0 pt-lg-0">
+						<div class="sidebar">
+							<h3>Trouver un coach</h3>
+
+							{{ form_start(form) }}
+
+							<div class="row">
+								<div class="form-row align-items-end d-flex">
+									<div class="col">
+										{{ form_row(form.mots) }}
+									</div>
+								</div>
+
+								{{ form_end(form) }}
+							</div>
+						</div>
+					</div>
+
+					<div class="col">
+						<div class="row annonce_container">
+
+
+							{% for annonce in annonces %}
+								{{ include('partial/_annonce.html.twig',{'annonce': annonce}) }}
+
+							{% endfor %}
+
+						</div>
+					</div>
+					<div class="bg-white p-4"></div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

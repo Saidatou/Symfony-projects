@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fruit index{% endblock %}
+
+{% block body %}
+    <h1>Fruit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Mois</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fruit in fruits %}
+            <tr>
+                <td>{{ fruit.id }}</td>
+                <td>{{ fruit.nom }}</td>
+                <td>{{ fruit.mois }}</td>
+                <td>
+                    <a href="{{ path('fruit_show', {'id': fruit.id}) }}">show</a>
+                    <a href="{{ path('fruit_edit', {'id': fruit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('fruit_new') }}">Create new</a>
+{% endblock %}

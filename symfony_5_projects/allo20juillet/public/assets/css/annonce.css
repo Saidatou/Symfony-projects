@@ -1,0 +1,21 @@
+*{
+    margin:0;
+    padding: 0;
+    outline: none;
+    border:none;
+}
+.vignette-annonces{
+    width: 20%;
+    min-width: 200px;
+    background: red ;
+    margin: 20px;
+    
+    
+}
+.vignette-annonces img{
+    width: 100%;
+}
+
+.annonces{
+    display: flex;
+}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New HomeSlider{% endblock %}
+
+{% block body %}
+    <h1>Create new HomeSlider</h1>
+
+    {{ include('home_slider/_form.html.twig') }}
+
+    <a href="{{ path('home_slider_index') }}">back to list</a>
+{% endblock %}

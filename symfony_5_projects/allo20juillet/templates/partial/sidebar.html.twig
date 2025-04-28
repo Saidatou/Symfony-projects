@@ -1,0 +1,84 @@
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">{{app.user.lastname}}
+				{{app.user.firstname}}</a>
+			<a class="navbar-brand" href="#">
+				<span id="profile"><img src="assets/images/profil-coach1.jpg" width="70px" heigth="35px" class="pr-3 mr-3" class="img-fluid rounded-circle"/><span></a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarMenu">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#profil">1- Complèter mon profil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#rib">1-2- ajouter mon RIB</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#prestation">1-3- Ajouter des prestation</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#soumettreprofil">1-4- soumettre mon profil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#messages">2- messages</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#reglements">3-règlements</a>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+
+		{# Mon profil#}
+
+		<section id="profil">
+			<div></div>
+			<div class="container-fuid">
+				<div class="mobile"></div>
+				<div class="laptop">
+					<div class="headin h2">
+						{{app.user.lastname}}
+						{{app.user.firstname}}</div>
+					<h3 class="content">Titre de l'annonce</h3>
+					<h4>{{app.user.email}}</h4>
+					<p class="adresse">17 rue alphonse karre,
+						<br>
+						75019 PARIS</p>
+					<a class="btn btn-lg btn-success" href="#">Télécharger CV</a>
+					<a class="btn btn-lg btn-primary" href="#reglement">Contactez-moi</a>
+				</div>
+
+			</div>
+
+		</section>
+
+		{# Mon rib#}
+
+		<section id="rib"></section>
+
+		{# Mon prestation#}
+
+		<section id="prestation"></section>
+
+		{# Mon soumettreprofil#}
+
+		<section id="soumettreprofil"></section>
+
+		{# ma messagerie #}
+		<section id="messages"></section>
+
+
+		{# Mon profil#}
+
+		<section id="profil"></section>
+
+
+		{# mes règlements#}
+		<section id="" reglement></section>

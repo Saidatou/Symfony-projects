@@ -1,0 +1,70 @@
+{% extends "layouts/base.html.twig" %} 
+{# {% block post.title %}{% endblock %} #}
+{% block body %}
+<div {{turbo_stream_listen("post_#{post.id}_comments")}}></div>
+ {# <div {{ stimulus_controller('hello')}}></div> #}
+<article>
+<h1>{{post.title}}</h1>
+
+<p>
+Published <time datetime="{{post.publishedAt|date('Y-m-d H:i')}}">{{post.publishedAt|date}} </time>
+by {{post.author.email}}
+</p>
+{# permettre les retour à la ligne lorsque l'auteur le fait au niveau de l'admin en saisissant son texte #}
+<p>{{post.body|raw}}</p>
+{# <p>{{post.body|nl2br}}</p> #}
+
+</article>
+
+
+<a href="{{path('app_posts_share',  { slug: post.slug } )}}">Share this Post</a>
+    
+<hr>
+     <section class="mt-5">
+        <h2>Similar posts</h2>
+
+        {% for post in similarPosts %}
+            <p>
+                <a href="{{ path('app_posts_show', { slug: post.slug }) }}">
+                    {{ post.title }}
+                </a>
+            </p>
+        {% else %}
+            There are no similar posts yet.
+        {% endfor %}
+</section>
+
+<section>
+
+{# <h2 id="comment-count">{{post.comments|length}} comments</h2>  #}
+    <h2 id="comments-count">{{pluralize(post.comments|length, 'comment', 'comments') }}</h2>
+
+
+
+    <div id="comment-list">
+            {% for comment in post.comments %}
+                {{ include('comments/_comment.html.twig', { comment, index: loop.index }) }}
+            {% else %}
+                <p>There are no comments yet.</p> 
+            {% endfor %}
+    </div>
+
+
+
+    
+<section class="mt-5">
+        <div class="row">
+        <div class="col-lg-6">
+        <h2>Add A New Comment</h2>
+    <turbo-frame id="new-comment-form"> 
+           {{ include('comments/_form.html.twig', {commentForm}) }}
+    </turbo-frame>
+        </div>
+        </div>
+    </section>
+
+    
+    
+
+
+{% endblock %}

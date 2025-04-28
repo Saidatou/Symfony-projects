@@ -1,0 +1,37 @@
+{{ include ("partial/title_section.html.twig", {"name":"Devenir caoch"})  }}
+
+<div class="login_register_wrap section">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-xl-6 col-md-10">
+				<div class="login_wrap">
+					<div class="padding_eight_all bg-white">
+						<div class="heading_s1">
+
+							{{ form_start(form) }}
+							{% for message in app.flashes('annonce_success') %}
+								<div class="col-md-12 alert alert-success alert-dismissible fade show" role="alert">
+									{{ message }}
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							{% endfor %}
+							{% for message in app.flashes('annonce_error') %}
+								<div class="col-md-12 alert alert-danger alert-dismissible fade show" role="alert">
+									{{ message }}
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							{% endfor %}
+							{{ form_widget(form) }}
+							{# <button class="btn">{{ button_label|default('Save') }}</button> #}
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

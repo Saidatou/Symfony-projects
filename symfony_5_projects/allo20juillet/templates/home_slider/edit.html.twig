@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit HomeSlider{% endblock %}
+
+{% block body %}
+    <h1>Edit HomeSlider</h1>
+
+    {{ include('home_slider/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('home_slider_index') }}">back to list</a>
+
+    {{ include('home_slider/_delete_form.html.twig') }}
+{% endblock %}

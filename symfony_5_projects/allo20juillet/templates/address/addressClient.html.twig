@@ -1,0 +1,78 @@
+{% extends "base.html.twig" %}
+
+{% block title %}address
+{% endblock %}
+
+{% block body %}
+
+	{{ include ("partial/title_section.html.twig", {"name":"Vos adresses"})  }}
+
+	<div class="container">
+		<div class="col-lg-9 col-md-8">
+
+			{% for message in app.flashes('address_message') %}
+
+				<div class="alert alert-success alert-dismissible fade show" role="alert">
+					{{message}}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			{% endfor %}
+
+			<div class="row">
+				<div class="col-lg-12">
+					<a href="{{path('address_new')}}" class="btn btn-primary btn-fill-out mb-3">Ajouter une adresse</a>
+
+				</div>
+			</div>
+
+			<div
+				class="row">
+				{# recupération de l'utilisateur connecté et regardé s'il a des adresses #}
+				{% if app.user.addresses %}
+					{# s'il a des adresses on les affiche par utilisation de la boucle for#}
+					{% set index = 0 %}
+					{# création d'une variable pour gérer la numérotation des adresses #}
+					{% for address in app.user.addresses %}
+						{% set index = index + 1 %}
+						<div class="col-lg-6">
+							<div class="card mb-3 mb-lg-0">
+								<div class="card-header">
+									<h3>
+										Votre adresse  #
+										{{index}}
+									</h3>
+								</div>
+								<div class="card-body">
+									<address>
+										{{address.fullName}}<br>
+										{{address.address}}
+										<br>
+										{{address.complement}}
+										<br>
+										{{address.city}}
+										<br>
+										{{address.codePostal}}<br>
+
+
+									</address>
+									<div class="btn-group">
+										<a href="{{path('address_edit', {'id':address.id})}}" class="btn btn-info">Modifier</a>
+										{# inclure le formulaire qui supprime #}
+										{{include('address/_delete_form.html.twig')}}
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					{% endfor %}
+				{% else %}
+					<p>Désolé, vous n'avez pas encore ajouter d'adresse</p>
+
+				{% endif %}
+			</div>
+
+		{% endblock %}

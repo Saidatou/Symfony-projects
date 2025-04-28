@@ -1,0 +1,13 @@
+#main{  /* Block body dans le base.html.twig */
+    display:flex;
+}
+header{
+    width:20%;
+}
+#content{ /* block content dans le admin/layout.html.twig */
+    width:80%;
+}
+
+nav{
+ background-color: black;
+}

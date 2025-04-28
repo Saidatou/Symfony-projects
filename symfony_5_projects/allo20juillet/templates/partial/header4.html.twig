@@ -1,0 +1,138 @@
+{# J’ai créé une navbar avec une class nav et je lui ai mis un « id » « ma-navbar ». Mais les classes je les nomme au fur et à mesure comme j’ai envi car ce ne sont pas des class bootstrap. Dans cette nav, j’ai mis trois éléments #}
+<nav
+	class="navbar" id="ma-navbar">
+	{# Le premier élément est le nom de mon site par le bais d’une balise «  a » avec une classe « nav-logo» #}
+
+	<a href="#" class="nav-logo">//MC-SPORTIFS\\</a>
+	{# Création du bouton berger qui sera afficher sur mobile et sera masqué sur un ordinateur #}
+	<span
+		class="nav-button">
+		{# 	
+																																																																J’ai ensuite fait le bouton hamberger sous forme d’un fichier svg en utilisant un span de class nav-button. Pour définir la taille des coordonnés des extremités de cette menu hambeger, j’ai utilisé la balises svg dans ce span avec un ViewBox à « 0 0 100 80 » et une largeur « width » de 40  et une hauteur « height » de 40 également. A l’intérieur de ce SVG j’ai fait 3 rectangles avec des balises «rect ». Un premier avec  width de 100 px et la height de 15 px mais pour pas que ces balises ne se mettent pas les uns sur les autres sur le deuxième rectangle j’airajouter un y de 35 px afin qu’il soit un peu en dessous et au troixième j’ai rajouté un autre y  à 70 px qui fait donc le double du 2e afin qu’il descende encore plus bas
+																																																																 #}
+		<svg viewbox="0 0 100 80" width="40" height="40">
+			<rect width="100" height="15"></rect>
+			<rect y="35" width="100" height="15"></rect>
+			<rect y="70" width="100" height="15"></rect>
+		</svg>
+	</span>
+	{# Création de mon menu. J’ai ensuite fait des ul avec des classes nav-menu va contenir mon menu. J’ai mis des options à l’intérieur de ce ul ce sont des « li » avec des classs que j’appelle des nav item. Chaque « li » contient une balise « a » avec un href. C’est options, j’en ai mis plusieurs dont accueil, inscription, connection etc.
+																															 #}
+	<ul class="nav-menu show">
+		<li class="nav-item">
+			<a href="{{path("home")}}">Accueil</a>
+		</li>
+		{% if app.user  %}
+			<li class="nav-item">
+				<a href="{{ path('app_logout') }}">Déconnexion</a>
+			</li>
+		{% else %}
+			<li class="nav-item">
+				<a href="{{path('annonce_new')}}">Devenir Coach MCS</a>
+			</li>
+			<li class="nav-item">
+				<a href="{{ path('app_login') }}">Connexion</a>
+			</li>
+			<li class="nav-item">
+				<a href="{{ path('app_register') }}">Inscription</a>
+			</li>
+			<li class="nav-drop">
+				<a href="#">Tarifs/Contact</a>
+				<ul class="dropdown">
+					<li class="drop-item">
+						<a href="{{path("home_product")}}">Acheter des heures</a>
+					</li>
+					<li class="drop-item">
+						<a href="{{path("coach")}}">Nos coachs</a>
+					</li>
+					<li class="drop-item">
+						<a href="{{ path("contact_new") }}">Contact</a>
+					</li>
+					<li class="drop-item">
+						<a href="{{path('faq')}}">FAQ</a>
+					</li>
+				</ul>
+			</li>
+		{% endif %}
+		{% if is_granted("ROLE_USER") %}
+			<li class="nav-drop">
+				<a href="#">Mon espace client</a>
+				<ul class="dropdown">
+					<li class="drop-item">
+						<a href="{{path("home_product")}}">Acheter des heures</a>
+					</li>
+					<li class="drop-item">
+						<a href="{{path('espace_client_profil')}}">Mon profil</a>
+					</li>
+					<li class="drop-item">
+						<a href="{{path("address_client")}}">Mes adresses</a>
+					</li>
+					<li class="drop-item">
+						<a href="{{path("messages")}}">Mes messages</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">Mes factures</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">Mes remboursements</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">Mes seances</a>
+					</li>
+				</ul>
+			</li>
+
+		{% endif %}
+		{% if is_granted ("ROLE_CAOCH") %}
+			<li class="nav-drop">
+				<a href="#">Mon espace pro</a>
+				<ul class="dropdown">
+
+					<li class="drop-item">
+						<a href="#">Mon annonce</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">Mes agendas</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">Mes paiements</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">Mes seances</a>
+					</li>
+				</ul>
+			</li>
+
+		{% endif %}
+		{% if is_granted ("ROLE_ADMIN") %}
+			<li class="nav-drop">
+				<a href="#">Mon espace admin</a>
+				<ul class="dropdown">
+
+					<li class="drop-item">
+						<a href="#">coachs</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">clients</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">form de contact</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">form inscrip coach</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">les remboursement</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">les paiements</a>
+					</li>
+					<li class="drop-item">
+						<a href="#">séances
+						</a>
+					</li>
+				</ul>
+			</li>
+		{% endif %}
+	</ul>
+</nav>

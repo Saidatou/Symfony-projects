@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les produits
+{% endblock %}
+
+{% block body %}
+	{{ include ("partial/title_section.html.twig", {"name":"Nos séances"})  }}
+
+
+	<div class="container">
+		<div class="bg-light p-3">
+			<h1>Nos séances</h1>
+			<p>Un client n'a droit qu'à une seule séance découverte d'une heure par nouveau coach choisi</p>
+		</div>
+
+
+		<div class="row">
+
+			<div class="col-md-4">
+				<div class="row">
+					<h2>Categories</h2>
+					<ul class="list-group">
+						{% for category in categories %}
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+								<a href="{{path('category_show', {'id':category.id})}}">
+									{{ category.name}}
+									<span class="badge bg-primary rounded-pill">{{category.products | length}}
+										article(s)</span>
+								</a>
+							</li>
+
+						{% endfor %}
+					</ul>
+
+				</div>
+
+
+			</div>
+
+			<div class="col-md-8">
+				<div class="row">
+					{% for product in products %}
+
+						<div
+							class="card col-md-4" style="width: 18rem; d-flex-between">
+							{# border border-dark rounded p-2 clearfix #}
+
+							<div class="card-body rounded p-2 clearfix ">
+
+								<h5>
+									{{ product.name }}
+									-
+									{{ product.price }}
+									€
+								</h5>
+								<hr>
+								<a href="{{path("cart_add", {"id": product.id})}}" class="btn btn-primary float-right">
+									<i class="fas fa-shopping-cart mr-1"></i>
+									Ajouter
+									<a href="{{path('product_show', {'id':product.id})}}" class="btn btn-dark">En savoir plus</a>
+								</div>
+							</div>
+						{% endfor %}
+
+
+					</div>
+				</div>
+
+
+			</div>
+
+		{% endblock %}

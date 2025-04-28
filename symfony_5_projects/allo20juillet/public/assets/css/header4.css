@@ -1,0 +1,140 @@
+/* 	Pour éviter qu’il y ait une couleur blanche autour de zone sur les côtés de ma navbar, j’ai mis sur le body magin 0. J'ai choisi par ordre de préférence les polices que je souhaite aficher;  */
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/*  
+Sur la zone qui contient la ma navbar, j’ai donné une couleur de fond. J’ai rajouté un padding pour pas que ça colle sur un côté, je lui donne aussi une hauteur de 80 px. J’ai repartie le nom de site à gauche et le menu à droite avec le display :flex. J’ai fait un justify-content de façon à mettre l’espace entre les deux, comme j’aimerai que ce soit verticalement centré, j’ai rajouter un align-items :center ;*/
+.navbar{
+    background-color: #3393FF;
+    padding: 0 1rem;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Sur les liens, c’est-à-dire les a, j’ai dit que je les veux en blanc. J’ai enlevé le surlignement, text-decoration : none, j’ai mis en gras, fontweigt : bold ; j’ai fait un font –size 1,5 rem ce qui fera à peut près 25 px */
+.navbar a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+/*  Sur le bouton, hamberger, j’ai mis un border 1 px solid, un paddind de 5 px afin qu’il ne soit pas sur le côté, un border radius de 3 px pour arrondir un tout petit peu les poins*/
+.nav-button{
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+/*   */
+.nav-logo{
+    text-decoration : underline;
+} 
+/* Sur un téléphone tous les ul et li ne doivent pas être visible à la base. J’ai donc mis sur mon nav-menu c’est-à-dire le « ul » en display : none. Pour sortir le menu de son emplacement actuel, je l’ai mis en position absolute, et en top à 80px car j’ai fait une hauteur de 80px pour ma nav-bar afin que ça passe en dessous. J’ai mis le menu complètement à gauche avec un left :0 pour qu’il soit callé à gauche et pour que ça s’étire sur toute la largeur j’ai mis le right également à 0. Pour enlever les margins qui sont au dessus et en dessous, j’ai mis un margin à 0.  Pour enlever les puces j’ai fait un list-style à none  */
+.nav-menu{
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background-color: #ddd;
+    margin: 0;
+    list-style: none;
+}
+/* Sur le nav-menu, j’ai rajouté une classe suplémentaire que j’ai nommé show. Avec cette classe show le menu va s’afficher et sans cette classe il ne s’affichera pas, je vais faire un display initial. s’il n’y pas la classe show ça ne s’affichera pas. J’ai rajouté les class nav-drop.show et dropdown. Ce qui va avoir pour effet que quand je clique sur nav-drop les li vont apparaître et si je ne clique pas il ne vont pas apparaître */
+.nav-menu.show,
+.nav-drop.show .dropdown{
+    display: initial;
+}
+/* Pour mes li, donc les nav-item et nav-drop, je leur ai mis un padding de 10px vertical afin de les espacer un tout petit peu et 20 px horizontal pour qu’il soit alignés différemment */
+.nav-item, .nav-drop{
+    /* padding: 10px 20px; */
+    padding: 0px;
+}
+
+.drop-item{
+    /* padding: 10px 20px; */
+    padding: - 10px -10px;
+   
+}
+
+
+/* Pour faire disparaitre le menu en dessous de tarifs et enlevé les puces de la liste, j’ai appliqué un display none à la dropdown et fait un list-style à none. */
+.dropdown{
+    display: none;
+    list-style: none;
+    
+}
+/* Pour faire la couleur du fond au survole,  j’ai fait un nav-item hover et nav-drop aussi hover et un backgroud color à lightgrey */
+.nav-item:hover, .nav-drop:hover{
+    background-color: lightgrey 
+    /* background-color: #3336FF;  */
+}
+/* Sur le nav-drop, j’ai souhaité positionner une flèche le nav-drop :after sauf qu’il a fallu que je pense à mettre le nav-drop(parent) en position relative ce qui va permettre de faire en sorte que le nav-drop  Tarif  soit considéré comme parent des drop-item. Les after sont les enfants de Tarifs */
+.nav-drop{
+    position: relative;
+}
+/* Je lui ai mis en content : «  », position relative, un top 14px, rigth à 10px, width et height à 0. J’ai fait un border de 6px solid transparent qui semble bizarre mais lorsqu’on rajoute un border-color en noir(ce qui fait apparaître un carré) mais avec d’autres coordonnées droite et gauche transparents et c’est en ce moment qu’apparaît la petite flèche.  */
+.nav-drop::after{
+    content: "";
+    position: absolute;
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #000 transparent transparent;
+}
+/* .Pour faire en sorte que la flèche se retourne quand je mettrai la class show, je refais un na-drop.show ::after avec la dernière ligne. */
+.nav-drop.show::after{
+    border-color: transparent transparent #000;
+}
+
+@media screen and (min-width: 768px){
+    /* je fais un display none sur le nav-button afin de ne plus l’avoir */
+    .nav-button{
+        display: none;
+    }
+
+   /* je fais un dispaly : initial sur le menu afin qu’il ait la place qu’il est sensé avoir. Je lui mets en position static afin de le remettre à sa place car j’avais donné une position absolute afin qu’il quitte sa place en format mobile à droite pour venir sur la gauche */
+    .nav-menu{
+        display: initial;
+        position: static;
+        background-color: unset;
+    }
+    /*  Pour que le menu s’affiche horizontalement, je vais mettre en display : inline block sur nav-item et le na-drop mai le problème c’est que les éléments de la navdrop vont vers le haut au lieu d’en dessous et les dépassements sont gérer par les padding et les margin. */
+    .nav-item, .nav-drop{
+        display: inline-block;
+        line-height: 80px;
+        height: 100%;
+        padding: 0 10px;
+    }
+    /*  Pour les dropdown, je mets en position absolute et un  top 80px, un right à 0 leurs permet de venir se positionner en dessous du parent. Max-content permet de de mettre tout sur la même ligne. */
+    .dropdown{
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background-color: #ddd;
+        /* background-color: #3336FF; */
+        width: max-content;
+        margin: 0;
+        /* padding: 10px 50px 30px 0; */
+        padding: 0 20px;
+    }
+    .nav-drop{
+        padding-right: 20px;
+    }
+
+    .nav-drop::after{
+        top: 50%;
+        right: 5px;
+    }
+    .nav-drop.show::after{
+        top: calc(50% - 7px)
+    }
+
+
+
+    /******** caroussel de la nav bare *******/
+}

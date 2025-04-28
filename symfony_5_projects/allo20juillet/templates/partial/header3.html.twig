@@ -1,0 +1,76 @@
+<!-- Navbar -->
+<nav
+	class="navbar navbar-expand-lg navbar-light bg-primary">
+	<!-- Container wrapper -->
+	<div
+		class="container">
+		<!-- Navbar brand -->
+		<a class="navbar-brand me-2" href="#">
+			<img src="assets/images/logo3.png" width="40" height="40" alt="" loading="lazy" style="margin-top: -1px;"/>
+		</a>
+
+		<!-- Toggle button -->
+		<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fas fa-bars"></i>
+		</button>
+
+		<!-- Collapsible wrapper -->
+		<div
+			class="collapse navbar-collapse" id="navbarButtonsExample">
+			<!-- Left links -->
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="navbar-brand text-white " href="#">
+						<strong>MES COACHS SPORTIFS</strong>
+					</a>
+				</li>
+			</ul>
+			<!-- Left links -->
+			<div class="d-flex align-items-center">
+
+				<a href="{{path("home")}}" type="button" class="btn btn-primary me-3">ACCUEIL</a>
+
+				{% if is_granted("ROLE_USER") %}
+
+					<a href="{{path("profile_client")}}" type="button" class="btn btn-primary me-3">ESPACE CLIENT</a>
+
+				{% endif %}
+
+				{% if is_granted ("ROLE_CAOCH") %}
+
+					<a href="{{path("profile_client")}}" type="button" class="btn btn-primary me-3">ESPACE CLIENT</a>
+
+					<a href="{{path("profile_coach")}}" type="button" class="btn btn-primary me-3">ESPACE COACH</a>
+				{% endif %}
+
+				{% if is_granted ("ROLE_ADMIN") %}
+
+					<a href="{{path("admin")}}" type="button" class="btn btn-primary me-3">ESPACE ADMIN</a>
+				{% endif %}
+
+				{% if app.user  %}
+					<a href="{{ path('app_logout') }}" type="button" class="btn btn-primary me-3">DÉCONNEXION</a>
+
+				{% else %}
+					<a href="#" type="button" class="btn btn-primary me-3">
+						TARIFS
+					</a>
+
+					<a href="{{ path('app_register') }}" type="button" class="btn btn-primary me-3">
+						INSCRIPTION
+					</a>
+					<a href="{{ path('app_login') }}" type="button" class="btn btn-primary me-3">
+						CONNEXION
+					</a>
+					<a type="button" class="btn btn-primary me-3">
+						DEVENIR COACH MCS
+					</a>
+
+
+				{% endif %}
+			</div>
+			<!-- Collapsible wrapper -->
+		</div>
+		<!-- Container wrapper -->
+	</nav>
+	<!-- Navbar -->

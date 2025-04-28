@@ -1,0 +1,18 @@
+<div data-turbo-temporary>
+
+{% for type, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ type }}" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>
+
+{# {% for message in app.flashes ('success') %}
+
+	<div class="alert alert-success" role="alert">
+		{{message}}
+	</div>
+
+{% endfor %} #}

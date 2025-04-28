@@ -1,0 +1,25 @@
+body{
+    background-color: black;
+    color:white;
+}
+#main{
+    width:80%;
+    margin:0 auto;
+}
+header{
+    display:flex;
+    justify-content:space-between;
+}
+
+header, #content{
+    padding:30px;
+}
+
+#logo, h1, h2{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:gold;
+}
+
+#logo{
+    font-size:1.8em;
+}

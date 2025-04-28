@@ -1,0 +1,125 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	MC SPORTIFS!
+{% endblock title %}
+
+
+{% block body %}
+
+	{{ include("partial/title_section.html.twig", {'name': 'Profile du coach'}) }}
+
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+					<div class="product-image">
+						<div class="product_img_box pb-10">
+							<img id="coach_img" src="{{ vich_uploader_asset( annonce, 'imageFile')|imagine_filter('welcome') }}" alt="{{ annonce.nickname }}"/>
+							<a href="#" class="product_img_zoom" title="Zoom">
+								<span class="linearicons-zoom-in"></span>
+							</a>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<div class="pr_detail">
+						<div class="annonce_title">
+							<h4 class="product_title">
+								<strong>NOM:
+								</strong>
+								<a href="#">{{annonce.nickname }}</a>
+							</h4>
+							<h5 class="product_title">
+								<strong>Titre :
+								</strong>
+								{{annonce.title }}
+							</h5>
+							<div class="pr_desc">
+
+								<h6>
+									<strong>Lieu de séance :</strong>
+									{% if annonce.isInYourHome %}
+										Chez le coach;
+									{% endif %}
+									{% if annonce.isInClientHome %}
+										Chez vous;
+									{% endif %}
+									{% if annonce.isInByVisio %}
+										en Visio.
+									{% endif %}
+
+
+								</h6>
+
+
+							</div>
+
+							<div class="pr_desc">
+								<p>
+									<strong>Ville d'exercice :
+									</strong>
+
+									{{annonce.city | raw}}</p>
+							</div>
+							<div class="pr_desc">
+								<p>
+									<strong>ID MC SPORTIFS :
+									</strong>
+
+
+									{{annonce.id | raw}}</p>
+							</div>
+							<div class="pr_desc">
+								<a href="{{path('sent')}}" class="btn btn-primary">Contactez le coach</a>
+							</div>
+
+
+						</div>
+						<hr/>
+						<div class="cart_extra"></div>
+						<hr/>
+					</div>
+				</div>
+			</div>
+
+			<div class="row pt-3 d-flex">
+				<div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+					<div class="contenu activeContenu" data-anim=" 1">
+						<h3>Adresses de séance chez le coach :</h3>
+						<hr>
+						<p>{{annonce.coachingPlaces}}
+						</p>
+					</div>
+					<div class="contenu activeContenu" data-anim=" 1">
+						<h3>Formation</h3>
+						<hr>
+						<p>{{annonce.formation}}
+						</p>
+					</div>
+					<div class="contenu activeContenu" data-anim=" 1">
+
+						<h3>Description</h3>
+						<hr>
+						<p>{{annonce.description}}
+						</p>
+					</div>
+					<div class="contenu activeContenu" data-anim=" 2">
+						<h3>Expérience en coaching sportifs</h3>
+						<hr>
+						<p>{{annonce.experience}}
+						</p>
+					</div>
+				</div>
+
+				<div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+					<h3>Calendrier du coach
+						{{annonce.nickname}}</h3>
+					<div class="col-md-12 col-lg-6 col-xl-4 h-100"></div>
+				</div>
+			</div>
+		</div>
+		{# ---------------------------------------------------------------------------------------------- #}
+	{% endblock body %}
+	{% block javascripts %}{% endblock %}

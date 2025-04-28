@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce
+{% endblock %}
+
+{% block body %}
+	<h1>Annonce</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ annonce.id }}</td>
+			</tr>
+			<tr>
+				<th>Nickname</th>
+				<td>{{ annonce.nickname }}</td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td>{{ annonce.title }}</td>
+			</tr>
+			<tr>
+				<th>Slug</th>
+				<td>{{ annonce.slug }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ annonce.description }}</td>
+			</tr>
+			<tr>
+				<th>Experience</th>
+				<td>{{ annonce.experience }}</td>
+			</tr>
+			<tr>
+				<th>Formation</th>
+				<td>{{ annonce.formation }}</td>
+			</tr>
+
+			<tr>
+				<th>IsInYourHome</th>
+				<td>{{ annonce.isInYourHome ? 'Yes' : 'No' }}</td>
+			</tr>
+			<tr>
+				<th>IsInClientHome</th>
+				<td>{{ annonce.isInClientHome ? 'Yes' : 'No' }}</td>
+			</tr>
+			<tr>
+				<th>IsInByVisio</th>
+				<td>{{ annonce.isInByVisio ? 'Yes' : 'No' }}</td>
+			</tr>
+
+			<tr>
+				<th>City</th>
+				<td>{{ annonce.city }}</td>
+			</tr>
+			<tr>
+				<th>Image</th>
+				<td>{{ annonce.image }}</td>
+			</tr>
+			<tr>
+				<th>Cv</th>
+				<td>{{ annonce.cv }}</td>
+			</tr>
+			<tr>
+				<th>Rib</th>
+				<td>{{ annonce.rib }}</td>
+			</tr>
+			<tr>
+				<th>Siretnumber</th>
+				<td>{{ annonce.siretnumber }}</td>
+			</tr>
+			<tr>
+				<th>Maj</th>
+				<td>{{ annonce.maj ? annonce.maj|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('annonce_index') }}">back to list</a>
+
+	<a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+
+	{{ include('annonce/_delete_form.html.twig') }}
+{% endblock %}

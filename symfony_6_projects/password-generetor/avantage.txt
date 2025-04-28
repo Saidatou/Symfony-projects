@@ -1,0 +1,122 @@
+- Session (coté serveur) => Pas e JS, Tout est géré coté serveur, Perd les préfs si on ferme le nav
+-LocalStorage(JS pur)=> Les prefs son persistées même si le nav est fermé. On a écrit beaucoup de JS.
+-SessionStorage(JS pur)=> Les prefs sont perdue si on ferme le nav.
+-LocalStorage(Alpine.js)=> Les prefs son persistées même si le nav est fermé. Cool peu de JS,
+ mais faut connaîte Alpine js et savoir gérer x-clock. Mais il faut penser au cas le JS n'est pas activé
+-SessionStorage(Alpine.js)=> Les prefs sont perdue si on ferme le nav.
+
+-Les prefs son persistées même si le nav est fermé, pas besoin d'écrire le JS et 
+tout allait fonctionner à la perfection: les cookies
+-base.html.twig
+<style>
+        .js [x-cloak] { display: none !important; }
+</style>
+ <body class="js">
+    <main role="main">
+    <noscript>
+    <p style="color:red; font-weight:bold">Please enable javascripts for a better user experience.</p>
+    
+    </noscript>
+
+    -home.html.twig
+    id="js-password-generator-form" 
+
+    x-cloak
+	x-data="{
+		length:$persist({{password_default_length}}), 
+		uppercaseLetters:$persist(false), 
+		digits:$persist(false), 
+		specialCharacters:$persist(false)}" 
+		> 
+
+        {% block javascripts %}
+<script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+ <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+ <script>
+ document.addEventListener('DOMContentLoaded', function () {
+
+ document.body.classList.add('js');
+
+ });
+ </script>
+	{# <script src="/js/password-preferences.js" defer></script> #}
+
+-alpin block javascripts :  .js [x-cloak] { display: none !important; }
+        </style> #}
+{% endblock %}
+
+- recuperation des par local staorage ou Session
+au niveau du render de home
+ return $this->render('pages/home.html.twig',[
+            'password_default_length'=> $this->getParameter('app.password_default_length'),
+            'password_min_length'=>$this->getParameter('app.password_min_length'),
+            'password_max_length'=>$this->getParameter('app.password_max_length'),
+          
+        ]);
+
+- les ckookies dans le home avant le refactoring
+
+ return $this->render('pages/home.html.twig',[
+            'password_default_length'=> $request->cookies->getInt('app_length', 
+            $this->getParameter('app.password_default_length')),
+            'uppercase_letters'=> $request->cookies->getBoolean('app_uppercase_letters'),
+            'digits'=> $request->cookies->getBoolean('app_digits'),
+            'special_characters'=> $request->cookies->getBoolean('app_special_characters'),
+            'password_min_length'=>$this->getParameter('app.password_min_length'),
+            'password_max_length'=>$this->getParameter('app.password_max_length'),
+          
+        ]);
+
+- les cookies avant le refactoring des le home.html.twig
+
+{% block body %}
+	<h1>Password Generator</h1>
+
+	<form 
+	
+	method="get" 
+	action="{{path('app_generate_password')}}" 
+	
+		<div>
+			<label for="length">Length</lavel>
+			<select id="length" name="length" >
+				{% for i in range(password_min_length,password_max_length) %}
+					<option value="{{i}}" {{ i == password_default_length ? 'selected'}}>{{i}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		{# {{app.session.get('app.uppercase_letters')?'checked'}} #}
+		<div>
+			<label for="uppercase-letters">Uppercase Letters</lavel>
+			<input type="checkbox" id="uppercase-letters" name="uppercase_letters" {{ uppercase_letters?'checked'}}>
+		</div>
+		{# {{app.session.get('app.digits')?'checked'}} #}
+		<div>
+			<label for="digits">Digits</lavel>
+			<input type="checkbox" id="digits" name="digits" {{ digits ?'checked'}} >
+		</div>
+
+		{# {{app.session.get('app.special_characters')?'checked'}} #}
+		<div>
+			<label for="special-characters">Special Characters</lavel>
+			<input type="checkbox" id="special-characters" name="special_characters" {{ special_characters?'checked'}}>
+
+		</div>
+		<div>
+			<button type="submit">Generate password</button>
+
+		</div>
+	</form>
+
+
+	<footer>
+		<p>
+			Built with &hearts; by
+			<a href="https://fit-mass-gravity.com">fit-mass-gravity</a>.
+		</p>
+
+	</footer>
+
+{% endblock %}
+
+    
